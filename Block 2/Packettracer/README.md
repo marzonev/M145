@@ -18,27 +18,27 @@ Wichtig bei der Serial Verbindung ist, dass die Baud Rate auf beiden Geräten gl
 
 #### Befehle anzeigen
 
-Mit ´´´?´´´ werden alle Befehle angezeigt.
+Mit ```?``` werden alle Befehle angezeigt.
 
-Mit ´´´r?´´´ können alle Befehle welche mit "r" beginnen angezeigt werden.
+Mit ```r?``` können alle Befehle welche mit "r" beginnen angezeigt werden.
 
 #### priveleged EXEC mode öffnen
 
-´´´ cisco
+``` cisco
 enable
-´´´
+```
 
 #### Global Configuration mode
 
 Hiermit kann man den Global Configuration mode öffnen
 
-´´´ cisco
+``` cisco
 configure
-´´´
+```
 
 ### Part 3
 
-Hier sieht man wie ich mit ´´´clock´´´ die Uhrzeit und das Datum geändert habe.
+Hier sieht man wie ich mit ```clock``` die Uhrzeit und das Datum geändert habe.
 
 ![clock](../media/clock.png)
 
