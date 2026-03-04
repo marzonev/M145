@@ -6,21 +6,21 @@
 
 Verbindung zwischen Switch und PC
 
-![connection](../media/connection.png)
+![connection](media/connection.png)
 
 #### Serial Connection
 
 Wichtig bei der Serial Verbindung ist, dass die Baud Rate auf beiden Geräten gleich ist.
 
-![serial](../media/serial.png)
+![serial](media/serial.png)
 
 ### Part 2
 
 #### Befehle anzeigen
 
-Mit ```?``` werden alle Befehle angezeigt.
+Mit `?` werden alle Befehle angezeigt.
 
-Mit ```r?``` können alle Befehle welche mit "r" beginnen angezeigt werden.
+Mit `r?` können alle Befehle welche mit "r" beginnen angezeigt werden.
 
 #### priveleged EXEC mode öffnen
 
@@ -38,9 +38,36 @@ configure
 
 ### Part 3
 
-Hier sieht man wie ich mit ```clock``` die Uhrzeit und das Datum geändert habe.
+Hier sieht man wie ich mit `clock` die Uhrzeit und das Datum geändert habe.
 
-![clock](../media/clock.png)
+![clock](media/clock.png)
 
 ## Aufgabe 2 - Configure Initial Switch Settings
 
+### Switch config
+
+Hier sieht man meine Switch Config mit `sh run`
+
+### Passwörter wechseln
+
+**Wichtig** Passwöter werden im Klartext gespeichert
+
+#### Console Passwort
+
+``` cisco
+line console 0
+```
+
+``` cisco
+password letmein
+```
+
+``` cisco
+login
+```
+
+#### Enable Passwort
+
+```
+enable password c1$c0
+```
