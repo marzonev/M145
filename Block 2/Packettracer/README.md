@@ -68,6 +68,44 @@ login
 
 #### Enable Passwort
 
-```
+``` cisco
 enable password c1$c0
+```
+
+#### Veschlüsseltes Passwort
+
+``` cisco
+enable secret itsasecret
+```
+
+Passwort im Klartext nachträglich verschlüsseln
+
+``` cisco
+service password-encryption
+```
+
+### MOTD Banner erstellen
+
+``` cisco
+banner motd "This is a secure system. Authorized Access Only!"
+```
+
+### Config speichern in nvram
+
+Mit diesem Befehl in NVRAM speichern dass es nach dem neustarten nicht zurückgesetzt wird.
+
+``` cisco
+copy running-config startup-config
+```
+
+Kann aber auch mit dem veralteten Befehlt gemacht werden.
+
+``` cisco
+write
+```
+
+oder
+
+``` cisco
+wr
 ```
