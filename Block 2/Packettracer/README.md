@@ -1,5 +1,23 @@
 # Cisco Packet Tracer
 
+- [Cisco Packet Tracer](#cisco-packet-tracer)
+  - [Aufgabe 1 - Navigate the IOS](#aufgabe-1---navigate-the-ios)
+    - [Part 1](#part-1)
+      - [Serial Connection](#serial-connection)
+    - [Part 2](#part-2)
+      - [Befehle anzeigen](#befehle-anzeigen)
+      - [priveleged EXEC mode öffnen](#priveleged-exec-mode-öffnen)
+      - [Global Configuration mode](#global-configuration-mode)
+    - [Part 3](#part-3)
+  - [Aufgabe 2 - Configure Initial Switch Settings](#aufgabe-2---configure-initial-switch-settings)
+    - [Switch config](#switch-config)
+    - [Passwörter wechseln](#passwörter-wechseln)
+      - [Console Passwort](#console-passwort)
+      - [Enable Passwort](#enable-passwort)
+      - [Veschlüsseltes Passwort](#veschlüsseltes-passwort)
+    - [MOTD Banner erstellen](#motd-banner-erstellen)
+    - [Config speichern in nvram](#config-speichern-in-nvram)
+
 ## Aufgabe 1 - Navigate the IOS
 
 ### Part 1
