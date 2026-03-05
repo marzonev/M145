@@ -17,6 +17,8 @@
       - [Veschlüsseltes Passwort](#veschlüsseltes-passwort)
     - [MOTD Banner erstellen](#motd-banner-erstellen)
     - [Config speichern in nvram](#config-speichern-in-nvram)
+  - [Aufgabe 3 - Implement Basic Connectivity](#aufgabe-3---implement-basic-connectivity)
+    - [Management IP setzen](#management-ip-setzen)
 
 ## Aufgabe 1 - Navigate the IOS
 
@@ -126,4 +128,20 @@ oder
 
 ``` cisco
 wr
+```
+
+## Aufgabe 3 - Implement Basic Connectivity
+
+### Management IP setzen
+
+``` cisco
+interface vlan 1
+```
+
+``` cisco
+ip address 192.168.1.253 255.255.255.0
+```
+
+``` cisco
+no shutdown
 ```
