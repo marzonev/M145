@@ -19,6 +19,7 @@
     - [Config speichern in nvram](#config-speichern-in-nvram)
   - [Aufgabe 3 - Implement Basic Connectivity](#aufgabe-3---implement-basic-connectivity)
     - [Management IP setzen](#management-ip-setzen)
+  - [Aufgabe 4 - Identify MAC and IP Addresses](#aufgabe-4---identify-mac-and-ip-addresses)
 
 ## Aufgabe 1 - Navigate the IOS
 
@@ -145,3 +146,5 @@ ip address 192.168.1.253 255.255.255.0
 ``` cisco
 no shutdown
 ```
+
+## Aufgabe 4 - Identify MAC and IP Addresses  
