@@ -20,6 +20,10 @@
   - [Aufgabe 3 - Implement Basic Connectivity](#aufgabe-3---implement-basic-connectivity)
     - [Management IP setzen](#management-ip-setzen)
   - [Aufgabe 4 - Identify MAC and IP Addresses](#aufgabe-4---identify-mac-and-ip-addresses)
+    - [PDU-Tabellen](#pdu-tabellen)
+      - [Part 1 – Lokale Kommunikation (172.16.31.5 → 172.16.31.2)](#part-1--lokale-kommunikation-17216315--17216312)
+      - [Part 2 – Remote-Kommunikation (172.16.31.5 → 10.10.10.2)](#part-2--remote-kommunikation-17216315--1010102)
+    - [Reflection Questions – Kurzantworten](#reflection-questions--kurzantworten)
 
 ## Aufgabe 1 - Navigate the IOS
 
@@ -148,3 +152,59 @@ no shutdown
 ```
 
 ## Aufgabe 4 - Identify MAC and IP Addresses  
+
+### PDU-Tabellen
+
+#### Part 1 – Lokale Kommunikation (172.16.31.5 → 172.16.31.2)
+
+| At Device   | Dest. MAC      | Src MAC        | Src IPv4    | Dest IPv4   |
+| ----------- | -------------- | -------------- | ----------- | ----------- |
+| 172.16.31.5 | 000C.85CC.1DA7 | 00D0.D311.C788 | 172.16.31.5 | 172.16.31.2 |
+| Switch1     | 000C:85CC:1DA7 | 00D0:D311:C788 |             |             |
+| Hub         | N/A            | N/A            | N/A         | N/A         |
+| 172.16.31.2 | 00D0:D311:C788 | 000C:85CC:1DA7 | 172.16.31.2 | 172.16.31.5 |
+
+> Switch und Hub leiten das PDU weiter, ohne IP-Adressen zu verarbeiten.  
+> Beim Hub werden MACs ignoriert – er broadcastet auf alle Ports.
+
+---
+
+#### Part 2 – Remote-Kommunikation (172.16.31.5 → 10.10.10.2)
+
+| At Device    | Dest. MAC        | Src MAC          | Src IPv4     | Dest IPv4    |
+|--------------|------------------|------------------|--------------|--------------|
+| 172.16.31.5  | 00D0:BA8E:741A   | 00D0:D311:C788   | 172.16.31.5  | 10.10.10.2   |
+| Switch1      | 00D0:BA8E:741A   | 00D0:D311:C788   | N/A          | N/A          |
+| Router       | 0060:2F84:4AB6   | 00D0:588C:2401   | 172.16.31.5  | 10.10.10.2   |
+| Switch0      | 0060:2F84:4AB6   | 00D0:588C:2401   | N/A          | N/A          |
+| Access Point | N/A              | N/A              | N/A          | N/A          |
+| 10.10.10.2   | 00D0:588C:2401   | 0060:2F84:4AB6   | 10.10.10.2   | 172.16.31.5  |
+
+> Am Router ändern sich die MAC-Adressen – die IP-Adressen bleiben konstant.
+
+---
+
+### Reflection Questions – Kurzantworten
+
+| #   | Frage                                           | Antwort                                                                                                                                   |
+| --- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Verschiedene Kabeltypen?                        | Ja – Kupferkabel (wired) und WLAN (wireless)                                                                                              |
+| 2   | Kabel beeinflussen PDU?                         | Nein – Inhalt bleibt gleich, nur physische Übertragung ändert sich                                                                        |
+| 3   | Hub verliert Infos?                             | Nein – broadcastet alles unverändert                                                                                                      |
+| 4   | Hub und MAC/IP?                                 | Hub ignoriert beides – arbeitet nur auf Layer 1                                                                                           |
+| 5   | Access Point verändert Infos?                   | Nein – leitet nur weiter (Wired ↔ Wireless)                                                                                               |
+| 6   | MAC/IP durch WLAN verloren?                     | Nein – alle Adressen bleiben erhalten                                                                                                     |
+| 7   | Höchster OSI-Layer bei Hub/AP?                  | Hub: Layer 1 · Access Point: Layer 1–2                                                                                                    |
+| 8   | Hub/AP replizieren abgelehnte PDUs?             | Ja – Hub broadcastet an alle Ports, Kopien werden mit rotem X abgelehnt                                                                   |
+| 9   | Welche MAC zuerst im PDU Details?               | Destination MAC                                                                                                                           |
+| 10  | Warum Dest. zuerst?                             | Ethernet-Frame-Struktur – Destination steht als erstes Feld im Header                                                                     |
+| 11  | Muster bei MAC-Adressen?                        | Lokale MACs auf gleichem Segment · Router tauscht MACs an Netzwerkgrenze                                                                  |
+| 12  | Switch repliziert abgelehnte PDUs?              | Nur beim ersten Mal, bevor MAC-Tabelle gelernt ist                                                                                        |
+| 13  | Wo änderten sich die MACs (10 ↔ 172)?           | Am **Router**                                                                                                                             |
+| 14  | Gerät mit MAC 00D0:BA?                          | Router (LAN-Interface Richtung 172.16.31.0)                                                                                               |
+| 15  | Andere MAC-Adressen?                            | `00D0:D311:C788` = 172.16.31.5 · `000C:85CC:1DA7` = 172.16.31.2 · `00D0:588C:2401` = Router WAN-Interface · `0060:2F84:4AB6` = 10.10.10.2 |
+| 16  | IPv4-Adressen geändert?                         | Nein – Source/Dest-IP bleiben immer gleich                                                                                                |
+| 17  | Beim Pong tauschen IPv4-Adressen?               | Ja – Quelle und Ziel werden vertauscht                                                                                                    |
+| 18  | IPv4-Muster?                                    | Zwei Netze: **172.16.31.0/24** (LAN) und **10.10.10.0/24** (WLAN), verbunden durch Router                                                 |
+| 19  | Warum braucht Router verschiedene IPs pro Port? | Um Routing-Entscheidungen treffen zu können – jedes Interface muss in einem anderen Netz liegen                                           |
+| 20  | Was wäre mit IPv6 anders?                       | 128-bit Hex-Adressen · ARP → NDP · kein Broadcast, stattdessen Multicast                                                                  |
