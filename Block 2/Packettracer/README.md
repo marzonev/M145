@@ -24,6 +24,12 @@
       - [Part 1 – Lokale Kommunikation (172.16.31.5 → 172.16.31.2)](#part-1--lokale-kommunikation-17216315--17216312)
       - [Part 2 – Remote-Kommunikation (172.16.31.5 → 10.10.10.2)](#part-2--remote-kommunikation-17216315--1010102)
     - [Reflection Questions – Kurzantworten](#reflection-questions--kurzantworten)
+  - [Aufgabe 5](#aufgabe-5)
+    - [Wichtige Befehle](#wichtige-befehle)
+      - [ARP-Befehle (End Device)](#arp-befehle-end-device)
+      - [Switch-Befehle (CLI)](#switch-befehle-cli)
+      - [Router-Befehle (CLI)](#router-befehle-cli)
+    - [Ablauf auf einen Blick](#ablauf-auf-einen-blick)
 
 ## Aufgabe 1 - Navigate the IOS
 
@@ -208,3 +214,66 @@ no shutdown
 | 18  | IPv4-Muster?                                    | Zwei Netze: **172.16.31.0/24** (LAN) und **10.10.10.0/24** (WLAN), verbunden durch Router                                                 |
 | 19  | Warum braucht Router verschiedene IPs pro Port? | Um Routing-Entscheidungen treffen zu können – jedes Interface muss in einem anderen Netz liegen                                           |
 | 20  | Was wäre mit IPv6 anders?                       | 128-bit Hex-Adressen · ARP → NDP · kein Broadcast, stattdessen Multicast                                                                  |
+
+## Aufgabe 5
+
+### Wichtige Befehle
+
+#### ARP-Befehle (End Device)
+
+ARP-Tabelle anzeigen:
+
+``` bash
+arp -a
+```
+
+ARP-Tabelle leeren:
+
+``` bash
+arp -d
+```
+
+Ping senden (löst ARP-Request aus, wenn MAC unbekannt):
+
+``` bash
+ping <IP>
+```
+
+---
+
+#### Switch-Befehle (CLI)
+
+MAC-Adresstabelle des Switches anzeigen:
+
+``` cisco
+show mac-address-table
+```
+
+---
+
+#### Router-Befehle (CLI)
+
+In den Privileged EXEC Mode wechseln:
+
+``` cisco
+enable
+```
+
+ARP-Tabelle des Routers anzeigen:
+
+``` cisco
+show arp
+```
+
+MAC-Tabelle anzeigen:
+
+``` cisco
+show mac-address-table
+```
+
+### Ablauf auf einen Blick
+
+1. **ARP-Request** – Gerät kennt Ziel-IP, aber nicht die MAC → sendet Broadcast an `FF:FF:FF:FF:FF:FF`
+2. **ARP-Reply** – Zielgerät antwortet mit seiner MAC (Unicast)
+3. **ICMP (Ping)** – Erst jetzt wird der eigentliche Ping gesendet
+4. **Remote-Kommunikation** – Bei Zielen außerhalb des eigenen Netzes wird die MAC des **Default Gateways (Router)** per ARP ermittelt, nicht die des Zielgeräts
