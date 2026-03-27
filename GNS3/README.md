@@ -25,3 +25,19 @@ Hier sieht man noch die screenshots von wireshark
 ![alt text](media/vlan503.png)
 
 [Wireshark export](media/vlanexport.pcapng)
+
+## Übung 4 – Praxisnahes VLAN Beispiel mit Router und DHCP Server
+
+Hier sieht man die Übersicht.
+
+![übersichtdhcp](media/übersichtdhcp.png)
+
+Hier sieht man wie die VPCs IPs per DHCP erhalten
+
+![ipsdhcp](media/ipsdhcp.png)
+
+Hier pingt je ein VPC aus jedem Vlan den Router
+
+![routerping](media/routerping.png)
+
+Hier sieht man die 3 /24 Netze
