@@ -41,3 +41,5 @@ Hier pingt je ein VPC aus jedem Vlan den Router
 ![routerping](media/routerping.png)
 
 Hier sieht man die 3 /24 Netze
+
+![subnets](media/subnets.png)
